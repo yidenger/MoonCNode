@@ -23,6 +23,9 @@
     [super viewDidLoad];
     NSLog(@"come into...");
     
+    //图片文字一起变色
+    self.tabBar.tintColor = [UIColor colorWithRed:0/255.0 green:187/255.0 blue:57/255.0 alpha:1];
+    
     //首页
     MoonHomeTableViewController *homeVC = [[MoonHomeTableViewController alloc]init];
     [self setupOneChildController:homeVC image:[UIImage imageNamed:@"Home"] andSelectedImage:[UIImage imageNamed:@"Home_selected"] WithTitle:@"首页"];
@@ -49,8 +52,11 @@
 
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
-    nav.tabBarItem = [[UITabBarItem alloc]initWithTitle:title image:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[selectedImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+//    nav.tabBarItem = [[UITabBarItem alloc]initWithTitle:title image:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[selectedImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    
+    nav.tabBarItem = [[UITabBarItem alloc]initWithTitle:title image:image selectedImage:selectedImg];
     vc.navigationItem.title = title;
+
     
     [self addChildViewController:nav];
 }

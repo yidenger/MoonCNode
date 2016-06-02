@@ -42,6 +42,7 @@
     [[UINavigationBar appearance]setBarStyle:UIBarStyleBlack];
     
     
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
