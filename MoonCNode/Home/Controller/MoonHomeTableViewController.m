@@ -7,8 +7,16 @@
 //
 
 #import "MoonHomeTableViewController.h"
+#import <AFNetworking.h>
+#import "MoonTopicModel.h"
+#import "MoonTopicCell.h"
+#import "MoonTopicFrame.h"
+#import "MoonPerson.h"
+
 
 @interface MoonHomeTableViewController ()
+
+@property(nonatomic, strong)NSMutableArray *topicArr;
 
 @end
 
@@ -17,11 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self getTopicDataFromServer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,70 +33,101 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    NSLog(@"number: %lu", (unsigned long)self.topicArr.count);
+    return self.topicArr.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    static NSString *identifier = @"topicCell";
     
+    MoonTopicCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (nil == cell) {
+        cell = [[MoonTopicCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
     // Configure the cell...
+    MoonTopicFrame *topicFrame = self.topicArr[indexPath.row];
+    cell.topicFrame = topicFrame;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MoonTopicFrame *topicFrame = self.topicArr[indexPath.row];
+    return topicFrame.cellHeight;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+
+//懒加载
+-(NSMutableArray *)topicArr{
+    
+    if (!_topicArr) {
+        _topicArr = [NSMutableArray array];
+    }
+    return  _topicArr;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+/**
+ *  从服务器获取话题数据
+ */
+-(void)getTopicDataFromServer{
+
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSString *url = @"https://cnodejs.org/api/v1/topics";
+    [manager GET:url parameters:nil success:^(NSURLSessionDataTask *session, NSDictionary *responseObj){
+        NSLog(@"获取话题数据成功");
+        NSArray *topicArr = responseObj[@"data"];
+        NSLog(@"topicArr count: %ld", [topicArr count]);
+        for (NSInteger i = 0; i < topicArr.count; i++) {
+            MoonTopicModel *topicModel = [[MoonTopicModel alloc]init];
+            NSDictionary *topicDic = [topicArr objectAtIndex:i];
+            topicModel.topic_id = topicDic[@"id"];
+            topicModel.author_id = topicDic[@"author_id"];
+            topicModel.tab = topicDic[@"tab"];
+            topicModel.content = topicDic[@"content"];
+            topicModel.title = topicDic[@"title"];
+            topicModel.last_reply_at = topicDic[@"last_reply_at"];
+            
+            topicModel.good = [topicDic[@"good"] boolValue];
+            topicModel.top = [topicDic[@"top"] boolValue];
+            topicModel.reply_count = [topicDic[@"reply_count"] integerValue];
+            topicModel.visit_count = [topicDic[@"visit_count"] integerValue];
+            topicModel.create_at = topicDic[@"create_at"];
+//            topicModel.person.loginName = topicDic[@"author"][@"loginname"];
+//            topicModel.person.avatar_url = topicDic[@"author"][@"avatar_url"];
+            
+            MoonPerson *person = [[MoonPerson alloc]init];
+            NSMutableDictionary *tmp = topicDic[@"author"];
+            person.loginName = tmp[@"loginname"];
+            person.avatar_url = tmp[@"avatar_url"];
+            
+            topicModel.person = person;
+            MoonTopicFrame *topicFrame = [[MoonTopicFrame alloc]init];
+            topicFrame.topic = topicModel;
+            [self.topicArr addObject:topicFrame];
+//            NSLog(@"%ld", i);
+        }
+//        NSLog(@"%@", self.topicArr);
+        [self.tableView reloadData];
+    
+    } failure:^(NSURLSessionDataTask *session, NSError *error){
+        NSLog(@"出错啦:%@", error);
+    }];
+
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

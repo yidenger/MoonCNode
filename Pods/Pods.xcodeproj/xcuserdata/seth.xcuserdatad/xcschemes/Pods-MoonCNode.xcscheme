@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '493FBB86B6FEA5F5C7E828BEB9D0083B'
+               BlueprintIdentifier = '9DC7770375AFA4C0075B774E1FC28B0C'
                BlueprintName = 'Pods-MoonCNode'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-MoonCNode.a'>

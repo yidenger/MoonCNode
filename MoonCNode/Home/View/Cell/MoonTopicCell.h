@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MoonTopicFrame.h"
+
 
 @interface MoonTopicCell : UITableViewCell
+
+@property(nonatomic, strong)MoonTopicFrame *topicFrame;
 
 @end

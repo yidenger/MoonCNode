@@ -57,6 +57,13 @@
 		5D2392641CFEADF400E02FB9 /* MoonQATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2392631CFEADF400E02FB9 /* MoonQATableViewController.m */; };
 		5D2392671CFEAE1800E02FB9 /* MoonRecruitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2392661CFEAE1800E02FB9 /* MoonRecruitTableViewController.m */; };
 		5D23926A1CFEAE2800E02FB9 /* MoonShareTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2392691CFEAE2800E02FB9 /* MoonShareTableViewController.m */; };
+		5D23DFA51D0964E1001A4927 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D23DFA41D0964E1001A4927 /* NSString+Extension.m */; };
+		5D23DFCB1D099C06001A4927 /* MoonTopicDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D23DFCA1D099C06001A4927 /* MoonTopicDetailsViewController.m */; };
+		5D23DFCE1D099C7D001A4927 /* MoonTopicDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D23DFCD1D099C7D001A4927 /* MoonTopicDetailsCell.m */; };
+		5D23DFD11D09ADFC001A4927 /* MoonTopicDetailsFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D23DFD01D09ADFC001A4927 /* MoonTopicDetailsFrame.m */; };
+		5D23DFD71D09AEB8001A4927 /* MoonTopicDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D23DFD61D09AEB8001A4927 /* MoonTopicDetailsModel.m */; };
+		5D7913821D06BE6500B6000C /* MoonTopicFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D7913811D06BE6500B6000C /* MoonTopicFrame.m */; };
+		5D9C500C1D08666100772733 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9C500B1D08666100772733 /* NSDate+Extension.m */; };
 		5DADD5D31D01132000B6A80D /* MoonPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DADD5D21D01132000B6A80D /* MoonPerson.m */; };
 		5DADD5D61D01155500B6A80D /* MoonTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DADD5D51D01155500B6A80D /* MoonTopicModel.m */; };
 		5DADD5DD1D012F4300B6A80D /* MoonTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DADD5DC1D012F4300B6A80D /* MoonTopicCell.m */; };
@@ -124,6 +131,20 @@
 		5D2392661CFEAE1800E02FB9 /* MoonRecruitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonRecruitTableViewController.m; sourceTree = "<group>"; };
 		5D2392681CFEAE2800E02FB9 /* MoonShareTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonShareTableViewController.h; sourceTree = "<group>"; };
 		5D2392691CFEAE2800E02FB9 /* MoonShareTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonShareTableViewController.m; sourceTree = "<group>"; };
+		5D23DFA31D0964E1001A4927 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		5D23DFA41D0964E1001A4927 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		5D23DFC91D099C06001A4927 /* MoonTopicDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonTopicDetailsViewController.h; sourceTree = "<group>"; };
+		5D23DFCA1D099C06001A4927 /* MoonTopicDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonTopicDetailsViewController.m; sourceTree = "<group>"; };
+		5D23DFCC1D099C7D001A4927 /* MoonTopicDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonTopicDetailsCell.h; sourceTree = "<group>"; };
+		5D23DFCD1D099C7D001A4927 /* MoonTopicDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonTopicDetailsCell.m; sourceTree = "<group>"; };
+		5D23DFCF1D09ADFC001A4927 /* MoonTopicDetailsFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonTopicDetailsFrame.h; sourceTree = "<group>"; };
+		5D23DFD01D09ADFC001A4927 /* MoonTopicDetailsFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonTopicDetailsFrame.m; sourceTree = "<group>"; };
+		5D23DFD51D09AEB8001A4927 /* MoonTopicDetailsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonTopicDetailsModel.h; sourceTree = "<group>"; };
+		5D23DFD61D09AEB8001A4927 /* MoonTopicDetailsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonTopicDetailsModel.m; sourceTree = "<group>"; };
+		5D7913801D06BE6500B6000C /* MoonTopicFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonTopicFrame.h; sourceTree = "<group>"; };
+		5D7913811D06BE6500B6000C /* MoonTopicFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonTopicFrame.m; sourceTree = "<group>"; };
+		5D9C500A1D08666100772733 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		5D9C500B1D08666100772733 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		5DADD5D11D01132000B6A80D /* MoonPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonPerson.h; sourceTree = "<group>"; };
 		5DADD5D21D01132000B6A80D /* MoonPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoonPerson.m; sourceTree = "<group>"; };
 		5DADD5D41D01155500B6A80D /* MoonTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoonTopicModel.h; sourceTree = "<group>"; };
@@ -260,6 +281,7 @@
 		5D2392411CFEA44300E02FB9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				5D9C50091D08666100772733 /* Category */,
 				5D2392451CFEA4F700E02FB9 /* MoonTabBarController.h */,
 				5D2392461CFEA4F700E02FB9 /* MoonTabBarController.m */,
 			);
@@ -314,6 +336,8 @@
 			children = (
 				5D23925F1CFEADD200E02FB9 /* MoonHomeTableViewController.h */,
 				5D2392601CFEADD200E02FB9 /* MoonHomeTableViewController.m */,
+				5D23DFC91D099C06001A4927 /* MoonTopicDetailsViewController.h */,
+				5D23DFCA1D099C06001A4927 /* MoonTopicDetailsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -321,10 +345,13 @@
 		5D23924E1CFEACDD00E02FB9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5D79137F1D06BE4300B6000C /* Cell */,
 				5DADD5D11D01132000B6A80D /* MoonPerson.h */,
 				5DADD5D21D01132000B6A80D /* MoonPerson.m */,
 				5DADD5D41D01155500B6A80D /* MoonTopicModel.h */,
 				5DADD5D51D01155500B6A80D /* MoonTopicModel.m */,
+				5D23DFD51D09AEB8001A4927 /* MoonTopicDetailsModel.h */,
+				5D23DFD61D09AEB8001A4927 /* MoonTopicDetailsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -436,11 +463,35 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		5D79137F1D06BE4300B6000C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5D7913801D06BE6500B6000C /* MoonTopicFrame.h */,
+				5D7913811D06BE6500B6000C /* MoonTopicFrame.m */,
+				5D23DFCF1D09ADFC001A4927 /* MoonTopicDetailsFrame.h */,
+				5D23DFD01D09ADFC001A4927 /* MoonTopicDetailsFrame.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		5D9C50091D08666100772733 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				5D9C500A1D08666100772733 /* NSDate+Extension.h */,
+				5D9C500B1D08666100772733 /* NSDate+Extension.m */,
+				5D23DFA31D0964E1001A4927 /* NSString+Extension.h */,
+				5D23DFA41D0964E1001A4927 /* NSString+Extension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		5DADD5D71D012BAC00B6A80D /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				5DADD5DB1D012F4300B6A80D /* MoonTopicCell.h */,
 				5DADD5DC1D012F4300B6A80D /* MoonTopicCell.m */,
+				5D23DFCC1D099C7D001A4927 /* MoonTopicDetailsCell.h */,
+				5D23DFCD1D099C7D001A4927 /* MoonTopicDetailsCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -622,14 +673,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D23DFD71D09AEB8001A4927 /* MoonTopicDetailsModel.m in Sources */,
+				5D23DFCB1D099C06001A4927 /* MoonTopicDetailsViewController.m in Sources */,
+				5D9C500C1D08666100772733 /* NSDate+Extension.m in Sources */,
 				5D2391451CFDAD6700E02FB9 /* ViewController.m in Sources */,
 				5DADD5D31D01132000B6A80D /* MoonPerson.m in Sources */,
 				5DADD5DD1D012F4300B6A80D /* MoonTopicCell.m in Sources */,
 				5D2391421CFDAD6700E02FB9 /* AppDelegate.m in Sources */,
+				5D23DFCE1D099C7D001A4927 /* MoonTopicDetailsCell.m in Sources */,
+				5D23DFD11D09ADFC001A4927 /* MoonTopicDetailsFrame.m in Sources */,
 				5DADD5D61D01155500B6A80D /* MoonTopicModel.m in Sources */,
 				5D2392671CFEAE1800E02FB9 /* MoonRecruitTableViewController.m in Sources */,
+				5D7913821D06BE6500B6000C /* MoonTopicFrame.m in Sources */,
 				5D2392471CFEA4F700E02FB9 /* MoonTabBarController.m in Sources */,
 				5D2392611CFEADD200E02FB9 /* MoonHomeTableViewController.m in Sources */,
+				5D23DFA51D0964E1001A4927 /* NSString+Extension.m in Sources */,
 				5D2392641CFEADF400E02FB9 /* MoonQATableViewController.m in Sources */,
 				5D23913F1CFDAD6700E02FB9 /* main.m in Sources */,
 				5D23925E1CFEAD7B00E02FB9 /* MoonEssenceTableViewController.m in Sources */,
