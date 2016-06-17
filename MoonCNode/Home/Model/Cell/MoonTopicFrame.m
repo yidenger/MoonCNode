@@ -68,7 +68,7 @@
     //计算高度
     self.cellHeight = 95.0f;
 
-
+    
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MoonTopicCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MoonTopicCell()
 
@@ -160,16 +161,18 @@
 //  self.avatarImgView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL: [NSURL URLWithString: self.topicFrame.topic.person.avatar_url]]];
     
     //使用GCD加载网络图片
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    
+//    dispatch_async(queue, ^{
+//        
+//        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.topicFrame.topic.person.avatar_url]]];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.avatarImgView.image = image;
+//        });
+//    
+//    });
     
-    dispatch_async(queue, ^{
-        
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.topicFrame.topic.person.avatar_url]]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.avatarImgView.image = image;
-        });
-    
-    });
+    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:self.topicFrame.topic.person.avatar_url] placeholderImage:[UIImage imageNamed:@"avatar"]];
     
 }
 

@@ -12,8 +12,8 @@
 
 -(void)setTopic:(MoonTopicModel *)topic{
     
-    
-    self.topic = topic;
+    NSLog(@"******set topic details frame...");
+    _topic = topic;
     
     
     
@@ -64,15 +64,53 @@
     CGFloat contentX = CGRectGetMinX(self.avatarImgFrame);
     CGFloat contentY = CGRectGetMaxY(self.avatarImgFrame) + 20;
     CGFloat contentWidth = self.titleFrame.size.width;
-
+    CGFloat contentHeight = 0;
     
+    if (self.contentWebViewHeight > 10) {
+        NSLog(@"not null>>>>>>>>>>>>>>>");
+        contentHeight = self.contentWebViewHeight;
+    }
+    
+    self.contentWebViewFrame = CGRectMake(contentX, contentY, contentWidth, contentHeight);
     
     //计算高度
-    self.cellHeight = 95.0f;
+//    self.cellHeight = 95.0f;
+    self.cellHeight = CGRectGetMaxY(self.contentWebViewFrame) + 20;
     
-    
-    
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeCellHeight:) name:@"webViewHeight" object:nil];
     
 }
+
+//-(void)setContentWebViewHeight:(CGFloat)contentWebViewHeight{
+//    
+//    NSLog(@"*****set contentWebViewHeight...");
+//    self.contentWebViewHeight = contentWebViewHeight;
+//    self.cellHeight += contentWebViewHeight;
+//}
+
+-(CGFloat)contentWebViewHeight{
+    if (_contentWebViewHeight < 10) {
+        return 0;
+    }
+    return _contentWebViewHeight;
+}
+
+-(CGFloat)cellHeight{
+    NSLog(@"******cellHeight: %f", _cellHeight);
+    return _cellHeight;
+    
+}
+
+
+//-(void)changeCellHeight:(NSNotification *)notification{
+//    //正文
+//    CGFloat contentX = CGRectGetMinX(self.avatarImgFrame);
+//    CGFloat contentY = CGRectGetMaxY(self.avatarImgFrame) + 20;
+//    CGFloat contentWidth = self.titleFrame.size.width;
+//    self.contentWebViewFrame = CGRectMake(contentX, contentY, contentWidth, [notification.object floatValue]);
+//    
+//    self.cellHeight = CGRectGetMaxY(self.contentWebViewFrame) + 20;
+//    NSLog(@"self.cellHeight: %f", self.cellHeight);
+//}
 
 @end

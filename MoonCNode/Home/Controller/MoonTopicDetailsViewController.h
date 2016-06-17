@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MoonTopicModel.h"
 @interface MoonTopicDetailsViewController : UITableViewController
-
+@property(nonatomic, strong)MoonTopicModel *topic;
+@property(nonatomic, assign)CGFloat detailsHeight;
 @end

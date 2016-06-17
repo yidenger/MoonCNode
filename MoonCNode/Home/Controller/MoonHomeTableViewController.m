@@ -12,6 +12,8 @@
 #import "MoonTopicCell.h"
 #import "MoonTopicFrame.h"
 #import "MoonPerson.h"
+#import "MoonTopicDetailsViewController.h"
+
 
 
 @interface MoonHomeTableViewController ()
@@ -69,6 +71,17 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     MoonTopicFrame *topicFrame = self.topicArr[indexPath.row];
     return topicFrame.cellHeight;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    MoonTopicDetailsViewController *detailsVC = [[MoonTopicDetailsViewController alloc]init];
+    detailsVC.topic = [self.topicArr[indexPath.row] topic];
+    
+    detailsVC.title = @"详情";
+    
+    [self.navigationController pushViewController:detailsVC animated:YES];
+    
 }
 
 
