@@ -11,7 +11,7 @@
 
 @interface MoonTopicModel : NSObject
 
-//文章id
+//话题id
 @property(nonatomic, copy)NSString *topic_id;
 //作者id
 @property(nonatomic, copy)NSString *author_id;

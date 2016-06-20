@@ -7,8 +7,8 @@
 //
 
 #import "MoonTopicReplyCell.h"
-
-@implementation MoonTopicReplyCell
+#import <WebKit/WebKit.h>
+#include <SDWebImage/UIImageView+WebCache.h>
 
 //
 //  MoonTopicDetailsCell.m
@@ -19,10 +19,9 @@
 //
 
 #import "MoonTopicDetailsCell.h"
-#import <WebKit/WebKit.h>
-#include <SDWebImage/UIImageView+WebCache.h>
 
-@interface MoonTopicDetailsCell()<WKNavigationDelegate, WKUIDelegate, UIWebViewDelegate>
+
+@interface MoonTopicReplyCell()<UIWebViewDelegate>
 
 //头像
 @property(nonatomic, weak)UIImageView *avatarImgView;
@@ -30,26 +29,24 @@
 @property(nonatomic, weak)UILabel *authorLabel;
 //创建时间
 @property(nonatomic, weak)UILabel *createAtLabel;
-//浏览数
-@property(nonatomic, weak)UILabel *visitedLabel;
-//标签（置顶or精华or分享or问答or招聘）
-@property(nonatomic, weak)UIButton *tabBtn;
-//标题
-@property(nonatomic, weak)UILabel *titleLabel;
-//正文
-//@property(nonatomic, weak)WKWebView *contentWebView;
 
 @property(nonatomic, weak)UIWebView *contentWebView;
 
-@property(nonatomic, assign)CGFloat contentWebViewHeight;
+@property(nonatomic, weak)UIImageView *zanImgView;
+@property(nonatomic, weak)UIImageView *replyImgView;
 
-@property(nonatomic, assign)CGFloat cellHeight;
+
+
+
 
 
 @end
 
 
-@implementation MoonTopicDetailsCell
+
+@implementation MoonTopicReplyCell
+
+
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
@@ -68,27 +65,20 @@
         UILabel *createAtLabel = [[UILabel alloc]init];
         [self.contentView addSubview: createAtLabel];
         self.createAtLabel = createAtLabel;
-        //标签
-        UIButton *tabBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        tabBtn.layer.cornerRadius = 3;
-        [self.contentView addSubview: tabBtn];
-        self.tabBtn = tabBtn;
-        //标题
-        UILabel *titleLabel = [[UILabel alloc]init];
-        [self.contentView addSubview:titleLabel];
-        self.titleLabel = titleLabel;
         
-        //浏览数
-        UILabel *visitedLabel = [[UILabel alloc]init];
-        [self.contentView addSubview:visitedLabel];
-        self.visitedLabel = visitedLabel;
+        //赞标志
+        UIImageView *zanImgView = [[UIImageView alloc]init];
+        [self.contentView addSubview:zanImgView];
+        self.zanImgView = zanImgView;
         
+        //回复标志
+        UIImageView *replyImgView = [[UIImageView alloc]init];
+        [self.contentView addSubview:replyImgView];
+        self.replyImgView = replyImgView;
         
         UIWebView *contentWebView = [[UIWebView alloc]init];
         contentWebView.scrollView.scrollEnabled = NO;
         contentWebView.delegate = self;
-        
-        //        contentWebView.scalesPageToFit = YES;//自动对页面进行缩放以适应屏幕
         
         [self.contentView addSubview:contentWebView];
         
@@ -104,94 +94,45 @@
 
 -(void)layoutSubviews{
     
+    [super layoutSubviews];
     //这里计算子控件frame
-    self.titleLabel.frame = self.topicDetailFrame.titleFrame;
     
-    self.avatarImgView.frame = self.topicDetailFrame.avatarImgFrame;
+    self.avatarImgView.frame = self.replyFrame.avatarImgFrame;
     
     //设置成圆形头像
     self.avatarImgView.layer.cornerRadius = self.avatarImgView.frame.size.width/2;
     self.avatarImgView.layer.masksToBounds = YES;
     
-    self.createAtLabel.frame = self.topicDetailFrame.createAtFrame;
-    self.tabBtn.frame = self.topicDetailFrame.tabBtnFrame;
-    self.visitedLabel.frame = self.topicDetailFrame.visitedFrame;
-    self.contentWebView.frame = self.topicDetailFrame.contentWebViewFrame;
+    self.authorLabel.frame = self.replyFrame.authorFrame;
+    
+    self.zanImgView.frame = self.replyFrame.zanFrame;
+    self.replyImgView.frame = self.replyFrame.replyFrame;
+    
+    self.createAtLabel.frame = self.replyFrame.createAtFrame;
+    self.contentWebView.frame = self.replyFrame.contentWebViewFrame;
     
     
 }
 
--(void)setTopicDetailFrame:(MoonTopicDetailsFrame *)topicDetailFrame{
+-(void)setReplyFrame:(MoonTopicReplyFrame *)replyFrame{
     
-    _topicDetailFrame = topicDetailFrame;
+    _replyFrame = replyFrame;
     
-    NSString *tabName = nil;
-    UIColor *tabBtnBackgroundColor = nil;
-    if ([self.topicDetailFrame.topic.tab isEqualToString:@"ask"]) {
-        tabName = @"问答";
-        tabBtnBackgroundColor = [UIColor colorWithRed:52/255.0 green:152/255.0 blue:219/255.0 alpha:1];
-    }
-    else if([self.topicDetailFrame.topic.tab isEqualToString:@"job"]){
-        tabName = @"招聘";
-        tabBtnBackgroundColor = [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182/255.0 alpha:1];
-    }
-    else if([self.topicDetailFrame.topic.tab isEqualToString:@"share"]){
-        tabName = @"分享";
-        tabBtnBackgroundColor = [UIColor colorWithRed:26/255.0 green:188/255.0 blue:156/255.0 alpha:1];
-    }
-    else{
-        tabName = @"其他";
-        tabBtnBackgroundColor = [UIColor colorWithRed:124/255.0 green:124/255.0 blue:124/255.0 alpha:1];
-    }
-    
-    if (self.topicDetailFrame.topic.good) {
-        tabName = @"精华";
-        tabBtnBackgroundColor = [UIColor colorWithRed:230/255.0 green:126/255.0 blue:34/255.0 alpha:1];
-    }
-    
-    if (self.topicDetailFrame.topic.top) {
-        tabName = @"置顶";
-        tabBtnBackgroundColor = [UIColor colorWithRed:231/255.0 green:76/255.0 blue:60/255.0 alpha:1];
-    }
-    
-    [self.tabBtn setTitle:tabName forState:UIControlStateNormal];
-    [self.tabBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    self.tabBtn.backgroundColor = tabBtnBackgroundColor;
-    
-    self.titleLabel.text = self.topicDetailFrame.topic.title;
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    
-    self.authorLabel.text = self.topicDetailFrame.topic.person.loginName;
+    self.authorLabel.text = self.replyFrame.replyModel.person.loginName;
     self.authorLabel.font = [UIFont systemFontOfSize:14];
     
-    self.createAtLabel.text = self.topicDetailFrame.topic.create_at;
+    self.zanImgView.image = [UIImage imageNamed:@"zan"];
+    self.replyImgView.image = [UIImage imageNamed:@"reply"];
+    
+    self.createAtLabel.text = self.replyFrame.replyModel.create_at;
     self.createAtLabel.font = [UIFont systemFontOfSize:12];
+
     
-    
-    NSString *visitedLabelText = [NSString stringWithFormat:@"%ld次浏览", (long)self.topicDetailFrame.topic.visit_count];
-    self.visitedLabel.font = [UIFont systemFontOfSize:14];
-    NSRange range =NSMakeRange(0, [NSString stringWithFormat:@"%ld", (long)self.topicDetailFrame.topic.visit_count].length);
-    NSMutableAttributedString *attr= [[NSMutableAttributedString alloc]initWithString:visitedLabelText];
-    [attr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:66/255.0 green:185/255.0 blue:138/255.0 alpha:1] range:range];
-    self.visitedLabel.attributedText = attr;
-    
-    //使用GCD加载网络图片
-    //    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //
-    //    dispatch_async(queue, ^{
-    //
-    //        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.topicDetailFrame.topic.person.avatar_url]]];
-    //        dispatch_async(dispatch_get_main_queue(), ^{
-    //            self.avatarImgView.image = image;
-    //        });
-    //
-    //    });
-    
-    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:self.topicDetailFrame.topic.person.avatar_url] placeholderImage:[UIImage imageNamed:@"avatar"]];
+    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:self.replyFrame.replyModel.person.avatar_url] placeholderImage:[UIImage imageNamed:@"avatar"]];
     
     NSString *css = @"<head><style>a{text-decoration:none;}img{max-width:294px !important;}</style></head>";
     //    NSString *css = @"<head><style>a{text-decoration:none;}</style></head>";
-    NSString *contentText  = [self.topicDetailFrame.topic.content stringByReplacingOccurrencesOfString:@"src=\"//" withString:@"src=\"http://"];
+    NSString *contentText  = [self.replyFrame.replyModel.content stringByReplacingOccurrencesOfString:@"src=\"//" withString:@"src=\"http://"];
     NSString *html = [NSString stringWithFormat:@"<body><div id='details'>%@</div></body>", contentText];
     
     [self.contentWebView loadHTMLString:[css stringByAppendingString:html] baseURL:nil];
@@ -199,15 +140,6 @@
     
 }
 
-
--(WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures
-{
-    NSLog(@"you click a link...");
-    if (!navigationAction.targetFrame.isMainFrame) {
-        [webView loadRequest:navigationAction.request];
-    }
-    return nil;
-}
 
 -(CGFloat)contentWebViewHeight{
     if (!_contentWebViewHeight) {
@@ -242,14 +174,14 @@
     CGFloat height = [[self.contentWebView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
     CGRect frame = self.contentWebView.frame;
     self.contentWebView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, height);
-    self.cellHeight = CGRectGetMaxY(self.contentWebView.frame) + 40;
-    self.topicDetailFrame.cellHeight = CGRectGetMaxY(self.contentWebView.frame) + 20;
     
-    //    self.contentWebView.scalesPageToFit = YES;
+    self.replyFrame.cellHeight = CGRectGetMaxY(self.contentWebView.frame) + 10;
+    
     if (height != self.contentWebViewHeight) {
         NSLog(@"&&&&&&&&&&!======");
         self.contentWebViewHeight = height;
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"getDoneHeight" object:[NSNumber numberWithFloat:self.cellHeight]];
+        self.cellHeight = CGRectGetMaxY(self.contentWebView.frame) + 10;
+//        [[NSNotificationCenter defaultCenter]postNotificationName:@"getDoneHeight" object:[NSNumber numberWithFloat:self.cellHeight]];
     }
     else{
       
@@ -265,5 +197,3 @@
 
 @end
 
-
-@end

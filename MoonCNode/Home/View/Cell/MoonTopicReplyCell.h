@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MoonTopicReplyFrame.h"
 
 @interface MoonTopicReplyCell : UITableViewCell
+
+@property(nonatomic,strong)MoonTopicReplyFrame *replyFrame;
+@property(nonatomic, assign)CGFloat cellHeight;
+@property(nonatomic, assign)CGFloat contentWebViewHeight;
 
 @end

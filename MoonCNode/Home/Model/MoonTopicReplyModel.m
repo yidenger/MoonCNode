@@ -7,7 +7,13 @@
 //
 
 #import "MoonTopicReplyModel.h"
+#import "NSString+Extension.h"
 
 @implementation MoonTopicReplyModel
+
+-(NSString *)create_at{
+    NSString *dateString = [_create_at getLocalDateFormateUTCDate];
+    return [dateString compareCurrentTime];
+}
 
 @end

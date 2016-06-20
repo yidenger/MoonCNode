@@ -31,7 +31,7 @@
 
 @property(nonatomic, assign)CGFloat contentWebViewHeight;
 
-@property(nonatomic, assign)CGFloat cellHeight;
+
 
 
 @end
@@ -68,6 +68,7 @@
         
         //浏览数
         UILabel *visitedLabel = [[UILabel alloc]init];
+        visitedLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:visitedLabel];
         self.visitedLabel = visitedLabel;
         
@@ -98,6 +99,8 @@
 }
 
 -(void)layoutSubviews{
+    
+    [super layoutSubviews];
 
     //这里计算子控件frame
     self.titleLabel.frame = self.topicDetailFrame.titleFrame;
@@ -107,6 +110,8 @@
     //设置成圆形头像
     self.avatarImgView.layer.cornerRadius = self.avatarImgView.frame.size.width/2;
     self.avatarImgView.layer.masksToBounds = YES;
+    
+    self.authorLabel.frame = self.topicDetailFrame.authorFrame;
     
     self.createAtLabel.frame = self.topicDetailFrame.createAtFrame;
     self.tabBtn.frame = self.topicDetailFrame.tabBtnFrame;
@@ -164,7 +169,7 @@
     
     
     NSString *visitedLabelText = [NSString stringWithFormat:@"%ld次浏览", (long)self.topicDetailFrame.topic.visit_count];
-    self.visitedLabel.font = [UIFont systemFontOfSize:14];
+    self.visitedLabel.font = [UIFont systemFontOfSize:12];
     NSRange range =NSMakeRange(0, [NSString stringWithFormat:@"%ld", (long)self.topicDetailFrame.topic.visit_count].length);
     NSMutableAttributedString *attr= [[NSMutableAttributedString alloc]initWithString:visitedLabelText];
     [attr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:66/255.0 green:185/255.0 blue:138/255.0 alpha:1] range:range];
@@ -339,8 +344,8 @@
     CGFloat height = [[self.contentWebView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
     CGRect frame = self.contentWebView.frame;
     self.contentWebView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, height);
-    self.cellHeight = CGRectGetMaxY(self.contentWebView.frame) + 40;
-    self.topicDetailFrame.cellHeight = CGRectGetMaxY(self.contentWebView.frame) + 20;
+    self.cellHeight = CGRectGetMaxY(self.contentWebView.frame) + 10;
+    self.topicDetailFrame.cellHeight = CGRectGetMaxY(self.contentWebView.frame) + 10;
 
 //    self.contentWebView.scalesPageToFit = YES;
     if (height != self.contentWebViewHeight) {

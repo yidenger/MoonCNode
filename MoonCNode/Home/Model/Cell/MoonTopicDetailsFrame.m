@@ -75,7 +75,7 @@
     
     //计算高度
 //    self.cellHeight = 95.0f;
-    self.cellHeight = CGRectGetMaxY(self.contentWebViewFrame) + 20;
+    self.cellHeight = CGRectGetMaxY(self.contentWebViewFrame) + 10;
     
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeCellHeight:) name:@"webViewHeight" object:nil];
     

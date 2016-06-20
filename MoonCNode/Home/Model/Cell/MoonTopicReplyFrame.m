@@ -31,6 +31,20 @@
     //    CGSize authorSize = [self.topic.person.loginName boundingRectWithSize:CGSizeMake(120, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14]} context:nil].size;
     self.authorFrame = CGRectMake(authorX, authorY, authorWidth, authorHeight);
     
+    //回复
+    CGFloat replyY = CGRectGetMinY(self.authorFrame);
+    CGFloat replyHeight = self.authorFrame.size.height;
+    CGFloat replyWidth = replyHeight;
+    CGFloat replyX = [UIScreen mainScreen].bounds.size.width - 13 - replyWidth;
+    self.replyFrame = CGRectMake(replyX, replyY, replyWidth, replyHeight);
+    
+    //赞
+    CGFloat zanY = self.replyFrame.origin.y;
+    CGFloat zanHeight = self.replyFrame.size.height;
+    CGFloat zanWidth = self.replyFrame.size.width;
+    CGFloat zanX = self.replyFrame.origin.x - 15 - zanWidth;
+    self.zanFrame = CGRectMake(zanX, zanY, zanWidth, zanHeight);
+    
     //创建时间
     CGFloat createAtX = CGRectGetMinX(self.authorFrame);
     CGFloat createAtY = CGRectGetMaxY(self.authorFrame) + 5;
@@ -53,7 +67,7 @@
     self.contentWebViewFrame = CGRectMake(contentX, contentY, contentWidth, contentHeight);
     
     //计算高度
-    self.cellHeight = CGRectGetMaxY(self.contentWebViewFrame) + 20;
+    self.cellHeight = CGRectGetMaxY(self.contentWebViewFrame) + 10;
     
 
     

@@ -13,5 +13,5 @@
 
 @property(nonatomic, strong)MoonTopicDetailsFrame *topicDetailFrame;
 
-
+@property(nonatomic, assign)CGFloat cellHeight;
 @end

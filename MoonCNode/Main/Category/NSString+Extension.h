@@ -31,7 +31,7 @@
  *
  *  @return  距离现在多长时间字符串(eg: 1分钟前)
  */
-- (NSString *) compareCurrentTime;
+- (NSString *)compareCurrentTime;
 
 
 @end

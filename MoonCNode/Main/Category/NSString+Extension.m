@@ -29,14 +29,16 @@
 
 
 
-- (NSString *) compareCurrentTime
+- (NSString *)compareCurrentTime
 {
-    
+    NSLog(@"%@", self);
     //把字符串转为NSdate
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
     NSDate *timeDate = [dateFormatter dateFromString:self];
-    
+    NSLog(@"timeDate: %@", timeDate);
     //得到与当前时间差
     NSTimeInterval  timeInterval = [timeDate timeIntervalSinceNow];
     timeInterval = -timeInterval;

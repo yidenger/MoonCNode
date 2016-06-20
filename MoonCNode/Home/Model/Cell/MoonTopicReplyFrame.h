@@ -20,5 +20,7 @@
 @property(nonatomic, assign)CGRect authorFrame;
 @property(nonatomic, assign)CGRect createAtFrame;
 @property(nonatomic, assign)CGRect contentWebViewFrame;
+@property(nonatomic, assign)CGRect zanFrame;
+@property(nonatomic, assign)CGRect replyFrame;
 
 @end
